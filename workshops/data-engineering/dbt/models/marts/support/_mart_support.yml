@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: mart_support__customer_context
+    description: Customer card the support agent loads. Versioned. TTL is one hour.
+    config:
+      contract:
+        enforced: false
+      meta:
+        consumer: support_agent
+        ttl_ms: 3600000
+    columns:
+      - name: account_id
+        description: Fernhill account id.
+        data_type: varchar
+        config:
+          meta: {pii: none, sensitivity: public, roles: [tier1, billing, admin]}
+
+exposures:
+  - name: support_agent_context
+    type: application
+    maturity: medium
+    owner:
+      name: Stephen
+    description: Customer card the support agent loads per ticket.
+    depends_on:
+      - ref('mart_support__customer_context')
+  - name: metrics_mcp
+    type: application
+    maturity: medium
+    owner:
+      name: Stephen
+    description: Metric tools served to the D6 agent.
+    depends_on:
+      - ref('mart_support__customer_context')

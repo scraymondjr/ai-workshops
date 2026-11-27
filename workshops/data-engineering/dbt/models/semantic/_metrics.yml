@@ -1,0 +1,14 @@
+version: 2
+
+# TODO(d5): semantic models on fct_subscription_days, fct_tickets, and dim_accounts.
+# Metrics: mrr, active_accounts, seats, arpa, tickets_opened, sla_breaches,
+# sla_breach_rate, first_response_median_minutes.
+# mrr is semi-additive. Summing it across days must be impossible.
+
+metrics:
+  - name: mrr
+    label: Monthly recurring revenue
+    description: Active subscription MRR in cents on the as-of date. Do not sum daily MRR across a month.
+    type: simple
+    type_params:
+      measure: TODO

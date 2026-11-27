@@ -1,0 +1,13 @@
+# Default target is local DuckDB. Copy an adapter profile over this file
+# when you are on Snowflake, BigQuery, or Databricks. See adapters/.
+fernhill:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "../fernhill.duckdb"
+      schema: main
+    audit:
+      type: duckdb
+      path: "../fernhill.duckdb"
+      schema: audit

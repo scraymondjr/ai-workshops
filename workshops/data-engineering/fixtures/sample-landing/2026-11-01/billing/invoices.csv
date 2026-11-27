@@ -1,0 +1,2 @@
+invoice_id,account_id,amount_cents,issued_at,status,updated_at
+inv_halcyon_2026-11,acc_halcyon,36000,2026-11-01T12:00:00Z,paid,2026-11-01T12:00:00Z

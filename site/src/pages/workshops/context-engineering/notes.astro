@@ -1,0 +1,59 @@
+---
+import Base from "../../../layouts/Base.astro";
+---
+<Base title="Context workshop notes" description="Tracks, stack, and cost as recorded in the workshop design on 26 Nov 2026.">
+  <article class="wrap band">
+    <h1>Notes</h1>
+    <p>Versions below are the ones the design recorded on 26 Nov 2026. This repo did not re-check them.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Vercel AI SDK</th><th>Google ADK</th><th>Claude Desktop</th></tr></thead>
+        <tbody>
+          <tr><td>Who</td><td>TypeScript engineers</td><td>Engineers, Python first</td><td>Less technical learners</td></tr>
+          <tr><td>Version recorded</td><td>ai 7.0.183, @ai-sdk/mcp 2.0.106</td><td>Python 2.15.1, TS 2.5.0, Go v2.8.0</td><td>Current desktop app, as of that date</td></tr>
+          <tr><td>Agent loop</td><td>ToolLoopAgent</td><td>LlmAgent</td><td>Claude chat in a project</td></tr>
+          <tr><td>Tools</td><td>@ai-sdk/mcp</td><td>McpToolset</td><td>Connectors and .mcpb extensions</td></tr>
+          <tr><td>Open models, $0</td><td>Workers AI and Ollama providers</td><td>Ollama via LiteLLM, Python only</td><td>Not applicable</td></tr>
+          <tr><td>Cost in the design</td><td>$0 on the defaults</td><td>$0 on the defaults for Python</td><td>Claude Pro, $20/month ($17 annual). No API needed.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Claude Desktop kit</h2>
+    <p>The design ships a kit: Fernhill knowledge files, a <code>fernhill.mcpb</code> desktop extension (mock tools plus <code>advance_clock</code>; refund and email are dry-run), scenario cards, rubrics, and a scoring prompt. Use a desktop extension, not a custom connector: custom connectors are reached from Anthropic's cloud and need a public HTTPS server. The starter includes the kit's manifest and rubrics under <code>workshops/context-engineering/tracks/claude-desktop/</code>. Packaging a tested <code>.mcpb</code> is still the open prep task the design names.</p>
+    <h2>Harness</h2>
+    <p>The harness is TypeScript because the world and the mock servers are the parts that must run inside <code>wrangler dev</code>, where TypeScript is native. Learners don't import it. They speak JSONL or HTTP. The same scenario runs against a Go agent, an ADK agent, or a Vercel agent.</p>
+    <pre><code>{`{"type":"turn","scenarioId":"m2-03","session":"s1","text":"OK, buy it","mcpUrl":"http://127.0.0.1:8790/mcp/catalog","principal":{"tenant":"halcyon","role":"tier1"}}`}</code></pre>
+    <h2>Cost, as estimated in the design</h2>
+    <ul>
+      <li>Default coding path: Workers Free, Ollama for full suites, Langfuse Hobby. $0.</li>
+      <li>Claude Desktop: $0 extra if you already have Pro. Usage counts toward plan limits. Pro includes no API credits.</li>
+      <li>If you outgrow the free allowance: Workers Paid plus live full-suite runs on gpt-oss-20b. $5/month plus about $0.43 per full run. That figure is the design's estimate, not a quote.</li>
+    </ul>
+    <p>The design's arithmetic: about 180 cases per full suite, 3 model calls per case, plus judge calls, on gpt-oss-20b. One full live run uses about four days of the free neuron allowance, so full suites run on Ollama by default.</p>
+    <h2>SDK versions recorded in the design</h2>
+    <ul>
+      <li>MCP TypeScript SDK 1.32.2, Python <code>mcp</code> 2.3.0, Go SDK v1.8.0</li>
+      <li>Agents SDK <code>agents</code> 0.34.1</li>
+      <li>promptfoo 0.126.0, Inspect 0.3.292</li>
+    </ul>
+    <h2>Still open</h2>
+    <ul>
+      <li>Public repo with a solutions branch, or private? This repo keeps solutions off main.</li>
+      <li>ADK Go stays optional until its OpenAI-compatible model support leaves experimental. The design's default is Python.</li>
+      <li>Who builds <code>fernhill.mcpb</code>: part of M0, or a prep task before the Claude track? The starter treats it as prep. The manifest is in the track folder.</li>
+    </ul>
+    <h2>Track references</h2>
+    <ul>
+      <li><a href="https://ai-sdk.dev/docs/agents/building-agents">AI SDK: Building agents</a></li>
+      <li><a href="https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools">AI SDK: MCP</a></li>
+      <li><a href="https://ai-sdk.dev/docs/agents/memory">AI SDK: Memory</a></li>
+      <li><a href="https://ai-sdk.dev/docs/agents/subagents">AI SDK: Subagents</a></li>
+      <li><a href="https://ai-sdk.dev/docs/agents/tool-approvals">AI SDK: Tool approvals</a></li>
+      <li><a href="https://google.github.io/adk-docs/">ADK overview</a></li>
+      <li><a href="https://adk.dev/evaluate/">ADK evaluation</a></li>
+      <li><a href="https://support.claude.com/en/articles/9517075-what-are-projects">Claude projects</a></li>
+      <li><a href="https://claude.com/docs/connectors/building/mcpb">Build a desktop extension with MCPB</a></li>
+      <li><a href="https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop">Local MCP servers</a></li>
+    </ul>
+  </article>
+</Base>

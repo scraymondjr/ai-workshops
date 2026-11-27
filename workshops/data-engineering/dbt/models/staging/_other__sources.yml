@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: tickets
+    schema: bronze
+    tables:
+      - name: tickets__events
+  - name: catalog
+    schema: bronze
+    tables:
+      - name: catalog__price_versions
+  - name: people
+    schema: bronze
+    tables:
+      - name: people__technicians

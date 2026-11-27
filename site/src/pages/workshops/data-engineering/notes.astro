@@ -1,0 +1,69 @@
+---
+import Base from "../../../layouts/Base.astro";
+---
+<Base title="Data workshop notes" description="Stack, cost, engines, and the positioning sources. Prices and dates were checked 27 Nov 2026 in the positioning notes.">
+  <article class="wrap band">
+    <p class="kicker">From the workshop design and the positioning notes</p>
+    <h1>Notes</h1>
+    <h2>Why dbt v1 is the main lane</h2>
+    <p>Local MetricFlow (dbt-metricflow 0.16.0 in the design) requires dbt-core 1.11 or 1.12. The design names dbt-core 1.12.7 and dbt-duckdb 1.11.1 as the main lane, and dbt v2 as a portability lane. The starter does not install dbt in the default setup command. The project files are there for <code>dbt deps</code> when you want them.</p>
+    <h2>Medallion, mapped to dbt</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Layer</th><th>Home</th><th>Naming</th><th>Rule</th></tr></thead>
+        <tbody>
+          <tr><td>Bronze</td><td>Loader, declared as sources</td><td>bronze.&lt;system&gt;__&lt;entity&gt;</td><td>Append-only. Never updated.</td></tr>
+          <tr><td>Silver, clean</td><td>models/staging</td><td>stg_&lt;system&gt;__&lt;entity&gt;</td><td>1:1 with the source. Rename, cast, dedupe. PII hashed.</td></tr>
+          <tr><td>Silver, history</td><td>snapshots and intermediate</td><td>snap_, int_</td><td>SCD2, business rules, conflicts</td></tr>
+          <tr><td>Gold</td><td>models/marts</td><td>dim_, fct_, mart_</td><td>Documented, versioned, exposures</td></tr>
+          <tr><td>Semantic</td><td>YAML on gold</td><td>metric names</td><td>Defined once. Queried by agents.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Semantic layer options, as recorded 26 Nov 2026</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Option</th><th>Cost in the design</th><th>Local DuckDB</th></tr></thead>
+        <tbody>
+          <tr><td>MetricFlow mf</td><td>$0</td><td>Yes. Your MCP server is D6.</td></tr>
+          <tr><td>dbt Semantic Layer on the platform</td><td>Starter $100/user/month in the design. Not in the free Developer plan.</td><td>No</td></tr>
+          <tr><td>Cube Core</td><td>$0 self-hosted</td><td>Yes, DuckDB driver</td></tr>
+          <tr><td>Boring Semantic Layer</td><td>$0</td><td>Yes, via Ibis</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Cost</h2>
+    <ul>
+      <li>Default path: everything local on DuckDB. D6 on Ollama, or Workers AI's free allowance for small runs. $0.</li>
+      <li>Optional MotherDuck Lite and R2 free tiers. $0 in the design.</li>
+      <li>D9: Elementary OSS, Dagster OSS, a webhook sink. $0.</li>
+      <li>Hosted Dagster+ Solo after the trial: $10/month plus usage, in the design.</li>
+      <li>Hosted dbt Semantic Layer: $100/user/month (Starter), in the design, and not on DuckDB.</li>
+    </ul>
+    <h2>Still open in the design</h2>
+    <ul>
+      <li>Public monorepo with a solutions branch, or private? This repo is the public-starter shape: solutions are not on main.</li>
+      <li>Dagster everywhere, or only in D9? This repo teaches Dagster in D9 and leaves cron as the fallback.</li>
+      <li>D6 agent language. The metrics server stub is Python, because MetricFlow is Python. The context harness can still drive a TypeScript agent.</li>
+      <li>Whether the main lane moves to dbt v2 once local MetricFlow supports it.</li>
+    </ul>
+    <h2>Positioning sources</h2>
+    <p>Prices and dates below were checked 27 Nov 2026 in the positioning research. "Not listed" meant the public page didn't show it. This page does not add figures that research didn't.</p>
+    <ul>
+      <li><a href="https://www.dataexpert.io/program/snowflake-dbt-analytics-engineering-boot-camp-4721">DataExpert.io Senior AI Analytics Engineering Boot Camp</a></li>
+      <li><a href="https://www.dataexpert.io/program/databricks-ai-data-engineer-boot-camp-2024">DataExpert.io Databricks AI Data Engineer Boot Camp</a></li>
+      <li><a href="https://maven.com/crispusroshan/ai-data-engineer-bootcamp">Maven: Senior AI Data Engineer Bootcamp</a></li>
+      <li><a href="https://maven.com/dataneighbor/build-ai-analysts-in-claude-code">Maven: Agentic Analytics</a></li>
+      <li><a href="https://maven.com/dataneighbor/enterprise-context-management-for-analytics">Maven: Enterprise Context Management</a></li>
+      <li><a href="https://maven.com/shailvi/data-quality">Maven: Data Quality Playbook</a></li>
+      <li><a href="https://courses.datatalks.club/de-zoomcamp-2026/dashboard">Data Engineering Zoomcamp 2026</a></li>
+      <li><a href="https://learn.getdbt.com/courses/semantic-layer">dbt Learn semantic layer course</a></li>
+      <li><a href="https://www.getdbt.com/certifications/analytics-engineer-certification-exam">dbt certification exam</a></li>
+      <li><a href="https://www.udemy.com/course/complete-dbt-data-build-tool-bootcamp-zero-to-hero-learn-dbt/">Udemy: The Complete dbt Bootcamp</a></li>
+      <li><a href="https://venturebeat.com/data/companies-are-building-governed-semantic-layers-most-say-their-ai-agents-are-getting-context-somewhere-else">VentureBeat on governed semantic layers</a></li>
+      <li><a href="https://www.prnewswire.com/news-releases/new-dbt-labs-report-finds-ai-driven-acceleration-is-outpacing-trust-and-governance-302741183.html">dbt Labs State of Analytics Engineering, April 2026</a></li>
+      <li><a href="https://news.ycombinator.com/item?id=45121003">Hacker News thread on semantic layers</a></li>
+    </ul>
+    <p>The edge the research names, in one line: you don't just build the semantic layer, you score an agent on it, then break production on purpose to prove it stays right.</p>
+  </article>
+</Base>

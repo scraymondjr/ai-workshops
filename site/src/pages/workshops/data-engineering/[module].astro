@@ -1,0 +1,13 @@
+---
+import Base from "../../../layouts/Base.astro";
+import ModulePage from "../../../components/ModulePage.astro";
+import { dataModules } from "../../../data/data-eng";
+
+export function getStaticPaths() {
+  return dataModules.map((module) => ({ params: { module: module.id }, props: { module } }));
+}
+const { module } = Astro.props;
+---
+<Base title={module.title} description={module.scenario}>
+  <ModulePage module={module} />
+</Base>

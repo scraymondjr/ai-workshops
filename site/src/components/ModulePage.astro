@@ -1,0 +1,109 @@
+---
+import Tabs from "./Tabs.astro";
+import Mermaid from "./Mermaid.astro";
+import type { WorkshopModule } from "../data/types";
+
+const { module } = Astro.props as { module: WorkshopModule };
+const base = import.meta.env.BASE_URL;
+const home = `${base}workshops/${module.workshop}/`;
+---
+<article class="wrap band">
+  <p class="kicker"><a href={home}>{module.workshop === "data-engineering" ? "Metrics, not SQL" : "Context engineering"}</a></p>
+  <h1>{module.title}</h1>
+  <div class="props">
+    <span>{module.phase}</span>
+    <span>{module.hours}</span>
+    <span>Builds on {module.builds}</span>
+    {module.pathLabel && <span>{module.pathLabel}</span>}
+  </div>
+  <p class="lede">{module.scenario}</p>
+  <ul>
+    {module.problem.map((item) => <li>{item}</li>)}
+  </ul>
+  {module.diagram && <Mermaid chart={module.diagram} />}
+
+  <h2>Starter design</h2>
+  <div class="split">
+    <div>
+      <h3>Provided</h3>
+      <ul>{module.provided.map((item) => <li>{item}</li>)}</ul>
+    </div>
+    <div>
+      <h3>You build</h3>
+      <ul>{module.build.map((item) => <li>{item}</li>)}</ul>
+    </div>
+  </div>
+  {module.tools.length > 0 && (
+    <>
+      <h3>Mock tools and models</h3>
+      <ul>{module.tools.map((item) => <li><code>{item}</code></li>)}</ul>
+    </>
+  )}
+
+  {module.code && (
+    <Tabs
+      name={`${module.id}-lang`}
+      tabs={[
+        { id: "ts", label: "TypeScript", code: module.code.ts, note: module.libs?.ts },
+        { id: "py", label: "Python", code: module.code.py, note: module.libs?.py },
+        { id: "go", label: "Go", code: module.code.go, note: module.libs?.go },
+      ]}
+    />
+  )}
+  {module.snippets?.map((snippet) => (
+    <section>
+      <h3>{snippet.label}</h3>
+      <pre><code>{snippet.code}</code></pre>
+    </section>
+  ))}
+
+  <h2>Success criteria</h2>
+  <ul>{module.criteria.map((item) => <li>{item}</li>)}</ul>
+
+  <h2>Evals</h2>
+  <p class="note">Starting thresholds from the workshop design. Tune them after the first baseline run.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Cases</th><th>Check</th><th>Metric</th><th>Pass at</th></tr></thead>
+      <tbody>
+        {module.evals.map((row) => (
+          <tr>{row.map((cell) => <td>{cell}</td>)}</tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  {module.tracks && (
+    <>
+      <h2>Tracks</h2>
+      <Tabs
+        name={`${module.id}-track`}
+        tabs={[
+          { id: "vercel", label: "Vercel AI SDK", code: module.tracks.vercel.join("\n\n"), note: "Framework primitives, then the gap you build." },
+          { id: "adk", label: "Google ADK", code: module.tracks.adk.join("\n\n") },
+          { id: "claude", label: "Claude Desktop", code: module.tracks.claude.join("\n\n"), note: "No-code exercise and rubric." },
+        ]}
+      />
+    </>
+  )}
+
+  <h2>Stretch</h2>
+  <ul>{module.stretch.map((item) => <li>{item}</li>)}</ul>
+
+  {module.sotaNote && (
+    <>
+      <h2>State of the art</h2>
+      <p>{module.sotaNote}</p>
+      <ul>
+        {module.links.map((link) => (
+          <li><a href={link.href}>{link.title}</a> <span class="meta">{link.site}</span></li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  <h2>Checkpoint</h2>
+  <div class="callout">
+    <p>{module.checkpoint}</p>
+  </div>
+</article>

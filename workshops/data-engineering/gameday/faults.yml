@@ -1,0 +1,106 @@
+# Twelve game-day faults. F01–F10 are the pipeline faults from the workshop design.
+# F11 and F12 break the agent, not only the pipeline. That is the positioning change.
+
+- id: F01_crm_drop_missing
+  breaks: pipeline
+  inject: {delete_tree: {day: "2026-11-02", system: crm}}
+  expect:
+    detectors: [source_freshness]
+    severity: error
+    published_to_main: false
+    pages: 1
+
+- id: F02_late_ticket_batch
+  breaks: pipeline
+  inject: {note: "3-day-late ticket events are absorbed by microbatch lookback 3"}
+  expect:
+    detectors: []
+    severity: none
+    pages: 0
+
+- id: F03_duplicate_drop
+  breaks: pipeline
+  inject: {redeliver: {day: "2026-11-01", path: billing/invoices.csv}}
+  expect:
+    detectors: []
+    severity: none
+    pages: 0
+
+- id: F04_partner_schema_drift
+  breaks: pipeline
+  inject: {rename_column: {day: "2026-11-01", path: billing/invoices.csv, from: amount_cents, to: amount}}
+  expect:
+    detectors: [contract:stg_billing__invoices, elementary.schema_changes_from_baseline]
+    severity: error
+    published_to_main: false
+    pages: 1
+
+- id: F05_null_account_ids
+  breaks: pipeline
+  inject: {blank_fraction: {day: "2026-11-03", path: tickets/events.jsonl, field: account_id, fraction: 0.4}}
+  expect:
+    detectors: [not_null, elementary.column_anomalies]
+    severity: error
+    pages: 1
+
+- id: F06_resend_corrected_events
+  breaks: pipeline
+  inject: {note: "Upstream re-sends 30 days of corrected events. Metric diff in audit; a human approves publish."}
+  expect:
+    detectors: [metric_diff]
+    severity: warn
+    pages: 0
+
+- id: F07_dst_duplicate
+  breaks: pipeline
+  inject: {note: "DST end on 1 Nov 2026 produces local-time duplicates. Caught by the DST unit test in CI."}
+  expect:
+    detectors: [unit_test:dst]
+    severity: error
+    pages: 0
+
+- id: F08_half_empty_crm
+  breaks: pipeline
+  inject: {truncate_fraction: {day: "2026-11-04", path: crm/accounts.jsonl, keep: 0.5}}
+  expect:
+    detectors: [volume_threshold]
+    severity: error
+    published_to_main: false
+    pages: 1
+
+- id: F09_fanout_join
+  breaks: pipeline
+  inject: {write: {path: bad_pr/fanout.sql, body: "select * from invoices i join accounts a on a.display_name = i.account_name"}}
+  expect:
+    detectors: [time_budget]
+    severity: error
+    pages: 0
+
+- id: F10_context_rowcount
+  breaks: pipeline
+  inject: {note: "Customer-context export drops half the accounts. RAG gate holds the export."}
+  expect:
+    detectors: [rag_gate_rowcount]
+    severity: error
+    pages: 1
+
+- id: F11_metric_definition_drift
+  breaks: agent
+  inject:
+    rewrite: {path: semantic/mrr.yml, body: "name: mrr\nagg: sum\ngrain: day\nnote: drifted definition silently changes agent answers\n"}
+  expect:
+    detectors: [agent_scorecard, metric_diff]
+    severity: error
+    published_to_main: false
+    pages: 1
+    agent_affected: true
+
+- id: F12_stale_kb_export
+  breaks: agent
+  inject: {replace_with_stale: {fresh: export/kb.md, stale: export/kb-stale.md}}
+  expect:
+    detectors: [export_as_of, agent_scorecard]
+    severity: error
+    published_to_main: false
+    pages: 1
+    agent_affected: true
