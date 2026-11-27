@@ -1,0 +1,51 @@
+---
+import Base from "../layouts/Base.astro";
+const base = import.meta.env.BASE_URL;
+const description = "Hands-on workshops for engineers who wire agents to company data. Local-first. Open models. $0 by default.";
+---
+<Base title="Fernhill workshops" description={description}>
+  <section class="hero wrap">
+    <p class="kicker">Five workshops, one dataset, one harness</p>
+    <h1>Make an agent answer from company data, then prove it.</h1>
+    <p class="lede">{description} Fernhill is a fictional field-service SaaS: CRM, billing, about 2,400 support tickets (400 of them Halcyon), a product catalog, and a knowledge base.</p>
+    <div class="pill-row">
+      <span class="pill">Ollama or Workers AI</span>
+      <span class="pill">DuckDB and dbt, locally</span>
+      <span class="pill">No healthcare data</span>
+    </div>
+  </section>
+  <section class="wrap band">
+    <div class="cards">
+      <a class="card" href={`${base}workshops/data-engineering/`}>
+        <p class="meta">Workshop · ready to teach</p>
+        <h3>Metrics, not SQL</h3>
+        <p>Take an agent from confidently wrong to scored on governed metrics, then break production on purpose.</p>
+      </a>
+      <a class="card" href={`${base}workshops/context-engineering/`}>
+        <p class="meta">Workshop · ready to teach</p>
+        <h3>Context, memory, safety</h3>
+        <p>Nine modules and a capstone. TypeScript, Python, and Go. Three tracks, including a no-code Claude Desktop track.</p>
+      </a>
+      <a class="card" href={`${base}workshops/production-agents/`}>
+        <p class="meta">Stub</p>
+        <h3>Production-grade agents</h3>
+        <p>Reserved in this monorepo. Not written yet.</p>
+      </a>
+      <a class="card" href={`${base}workshops/dynamic-ui/`}>
+        <p class="meta">Stub</p>
+        <h3>Dynamic UI and MCP apps</h3>
+        <p>Reserved in this monorepo. Not written yet.</p>
+      </a>
+      <a class="card" href={`${base}workshops/evals/`}>
+        <p class="meta">Stub</p>
+        <h3>Evals and fine-tuning</h3>
+        <p>The design treats this as the thread through the other workshops. The page is a stub.</p>
+      </a>
+      <a class="card" href={`${base}workshops/data-engineering/game-day/`}>
+        <p class="meta">One-day product</p>
+        <h3>Game day</h3>
+        <p>Twelve faults. Two of them break the agent, not just the pipeline.</p>
+      </a>
+    </div>
+  </section>
+</Base>

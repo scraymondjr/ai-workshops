@@ -1,0 +1,22 @@
+---
+const { name, tabs } = Astro.props as {
+  name: string;
+  tabs: { id: string; label: string; code?: string; note?: string; html?: string }[];
+};
+---
+<div class="tabs">
+  {tabs.map((tab, index) => (
+    <input class={tab.id} type="radio" name={name} id={`${name}-${tab.id}`} checked={index === 0} />
+  ))}
+  <div class="tabbar" role="tablist">
+    {tabs.map((tab) => (
+      <label for={`${name}-${tab.id}`}>{tab.label}</label>
+    ))}
+  </div>
+  {tabs.map((tab) => (
+    <div class={`panel ${tab.id}`}>
+      {tab.note && <p class="note">{tab.note}</p>}
+      {tab.code && <pre><code>{tab.code}</code></pre>}
+    </div>
+  ))}
+</div>

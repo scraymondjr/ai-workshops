@@ -1,0 +1,46 @@
+---
+import Base from "../../../layouts/Base.astro";
+const base = import.meta.env.BASE_URL;
+---
+<Base title="Data incident game day" description="Break a Fernhill pipeline twelve ways in a day. Two faults break the agent.">
+  <article class="wrap hero">
+    <p class="kicker"><a href={`${base}workshops/data-engineering/`}>Metrics, not SQL</a></p>
+    <h1>Game day.</h1>
+    <p class="lede">Break a dbt pipeline on purpose. Leave with tests, alert routing, and runbooks. This is also the one-day product in the positioning notes: $300–600 per seat, or a self-serve kit. The cohort credits the fee.</p>
+    <p>The folder <code>workshops/data-engineering/gameday/</code> is the kit: faults, injector, runbook, postmortem template. A finished D0–D8 pipeline is not on <code>main</code>.</p>
+    <h2>Twelve faults</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Fault</th><th>Expected detector</th><th>Severity</th></tr></thead>
+        <tbody>
+          <tr><td>F01 CRM drop missing</td><td>Source freshness</td><td>Error, page</td></tr>
+          <tr><td>F02 Ticket batch 3 days late</td><td>Absorbed by lookback 3</td><td>None</td></tr>
+          <tr><td>F03 Billing file delivered twice</td><td>Absorbed by the loader</td><td>None</td></tr>
+          <tr><td>F04 Partner renames a billing column</td><td>Contract and schema-change monitor</td><td>Error, page</td></tr>
+          <tr><td>F05 40% null account_id</td><td>not_null with error_if, plus a null-rate anomaly</td><td>Error, page</td></tr>
+          <tr><td>F06 30 days of corrected events</td><td>Metric diff in audit</td><td>Warn. A human approves publish.</td></tr>
+          <tr><td>F07 DST end, 1 Nov 2026</td><td>DST unit test in CI</td><td>Blocks merge</td></tr>
+          <tr><td>F08 CRM extract with half the accounts</td><td>Volume threshold. Snapshot held.</td><td>Error, page</td></tr>
+          <tr><td>F09 PR adds a fan-out join</td><td>Time budget from run_results.json</td><td>Blocks merge</td></tr>
+          <tr><td>F10 Customer-context mart misses accounts</td><td>RAG gate row count</td><td>Error, page. Export held.</td></tr>
+          <tr><td>F11 Metric definition drifts</td><td>Agent scorecard and metric diff</td><td>Error, page. The agent is wrong.</td></tr>
+          <tr><td>F12 Stale KB export still served</td><td>Export as_of and the agent scorecard</td><td>Error, page. The agent is wrong.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>F08 is the dangerous pipeline fault: a snapshot of a half-empty extract would record false deletions if it runs before the audit passes. F11 and F12 are the positioning addition. They are not in the original ten. They break answers while a row count can still look fine.</p>
+    <h2>Where an alert goes</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Signal</th><th>Route</th><th>Dedup</th></tr></thead>
+        <tbody>
+          <tr><td>Critical test, freshness error, SLO fast burn</td><td>On-call page</td><td>24 h suppression, grouped by table</td></tr>
+          <tr><td>Warnings, anomaly monitors, slow burn</td><td>Daily digest</td><td>One message a day</td></tr>
+          <tr><td>Absorbed events (F02, F03)</td><td>Log only</td><td>Not sent</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The SLO in the design: the customer-context mart is within its TTL on 99% of runs over 28 days. Page on fast burn, digest on slow burn. Every page answers three questions: what is wrong, is the agent affected, and which runbook.</p>
+    <p><a href={`${base}workshops/data-engineering/d9/`}>D9 module page</a></p>
+  </article>
+</Base>

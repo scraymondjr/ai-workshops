@@ -1,0 +1,21 @@
+{
+  "name": "@fernhill/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ws": "tsx src/cli.ts",
+    "generate": "tsx src/cli.ts generate",
+    "test:smoke": "vitest run --config vitest.smoke.ts",
+    "test:learner": "vitest run --config vitest.learner.ts"
+  },
+  "dependencies": {
+    "yaml": "^2.7.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}

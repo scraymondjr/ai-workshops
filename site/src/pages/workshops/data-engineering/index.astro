@@ -1,0 +1,87 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Mermaid from "../../../components/Mermaid.astro";
+import { dataModules } from "../../../data/data-eng";
+const base = import.meta.env.BASE_URL;
+const description = "Metrics, not SQL. For engineers who must make an AI agent answer correctly from company data.";
+---
+<Base title="Metrics, not SQL" description={description}>
+  <section class="hero wrap hero-grid">
+    <div>
+      <p class="kicker">Data engineering for AI · dbt and medallion</p>
+      <h1>Metrics, not SQL.</h1>
+      <p class="lede">Take an agent from confidently wrong to eval-proven on governed metrics, then keep it right in production. You don't just build the semantic layer. You score an agent on it, then break production on purpose.</p>
+      <div class="pill-row">
+        <span class="pill free">Free core: D0–D2 and the harness</span>
+        <span class="pill live">Live cohort, about 24 h</span>
+        <span class="pill">Full path, 54 h plus a 4 h capstone</span>
+      </div>
+    </div>
+    <aside class="scorecard">
+      <p class="meta" style="color:#c9ddd2">Recorded naive baseline in this repo</p>
+      <div class="pair">
+        <div>
+          <p class="big">2/40</p>
+          <p class="sub">questions correct</p>
+        </div>
+        <div>
+          <p class="big">0.95</p>
+          <p class="sub">confidently-wrong rate</p>
+        </div>
+      </div>
+      <p class="sub">No model call. The generator writes the gold. The naive agent treats October invoices as MRR and invents an NPS. Re-run the scorecard after every module.</p>
+    </aside>
+  </section>
+
+  <section class="wrap band">
+    <h2>Who it's for</h2>
+    <p>Software and analytics engineers, about 2–8 years in, told to wire an agent or an AI feature to company data. The promise, the buyer, and the price bands below are the positioning recommendation checked 27 Nov 2026, not a new claim.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>Free core</h3>
+        <p>Public starter: D0–D2 plus the harness. The funnel.</p>
+      </div>
+      <div class="card">
+        <h3>Game day</h3>
+        <p>One day, $300–600 per seat in the positioning notes. Twelve faults, two of them aimed at the agent. The fee credits a later cohort seat.</p>
+      </div>
+      <div class="card">
+        <h3>Cohort</h3>
+        <p>Four weeks, 8 × 2 h plus office hours. Price band $1,200–1,800. Live time on D0, D4, D5, D6, D8, D9, and the capstone. D1–D3 are graded prework.</p>
+      </div>
+    </div>
+    <p>A private team sprint is the later rung. The positioning notes found no public per-team price, so this site doesn't invent one. Sources and the ladder are on the <a href={`${base}workshops/data-engineering/notes/`}>notes page</a>.</p>
+  </section>
+
+  <section class="wrap band">
+    <h2>Two paths, one repo</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Path</th><th>What you do</th><th>Time in the design</th></tr></thead>
+        <tbody>
+          <tr><td>Self-paced</td><td>D0 through D9, then the capstone</td><td>54 h of modules plus a 4 h capstone</td></tr>
+          <tr><td>Live cohort</td><td>D1–D3 as graded prework. Live sessions on D0, D4, D5, D6, D8, D9, and the capstone.</td><td>About 24 h. The named live modules add up to more lab hours than that, so live time covers the checkpoints. The rest stays self-paced.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <Mermaid chart={`flowchart LR
+  free["Free core: D0-D2 + harness"] --> demo["Live demo"]
+  demo --> gd["Game day, 1 day"]
+  demo --> cohort["Metrics, not SQL"]
+  gd -->|credit the fee| cohort
+  cohort --> own["Capstone on your data"]`} />
+  </section>
+
+  <section class="wrap band">
+    <h2>Modules</h2>
+    <div class="module-list">
+      {dataModules.map((module) => (
+        <a class="module-card" href={`${base}workshops/data-engineering/${module.id}/`}>
+          <p class="meta">{module.hours} · {module.phase}{module.pathLabel ? ` · ${module.pathLabel}` : ""}</p>
+          <h3>{module.title}</h3>
+          <p>{module.scenario}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Base>

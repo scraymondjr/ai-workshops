@@ -1,0 +1,19 @@
+{
+  "name": "ai-workshops",
+  "private": true,
+  "type": "module",
+  "description": "Hands-on AI systems workshops. Local-first, $0 by default.",
+  "scripts": {
+    "setup": "./setup.sh",
+    "ws": "pnpm --filter @fernhill/shared ws",
+    "generate": "pnpm --filter @fernhill/shared generate",
+    "test:smoke": "pnpm --filter @fernhill/shared test:smoke && ./scripts/verify-learner-exercises.sh",
+    "test:learner": "pnpm --filter @fernhill/shared test:learner",
+    "site:build": "pnpm --filter site build",
+    "site:dev": "pnpm --filter site dev"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@9.15.9"
+}

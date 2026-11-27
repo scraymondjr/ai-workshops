@@ -1,0 +1,17 @@
+fernhill:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('BIGQUERY_PROJECT') }}"
+      keyfile: "{{ env_var('BIGQUERY_KEYFILE') }}"
+      dataset: fernhill_dev
+      threads: 4
+    audit:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('BIGQUERY_PROJECT') }}"
+      keyfile: "{{ env_var('BIGQUERY_KEYFILE') }}"
+      dataset: fernhill_audit
+      threads: 4

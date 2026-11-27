@@ -1,0 +1,70 @@
+[
+  {
+    "id": "m0-01",
+    "module": "m0",
+    "session": "s1",
+    "principal": { "tenant": "halcyon", "role": "tier1", "purpose": "support" },
+    "turns": [{ "type": "user", "text": "What plan is Halcyon billed on?" }],
+    "gold": { "answer": "Halcyon is billed on the Team plan." }
+  },
+  {
+    "id": "m0-02",
+    "module": "m0",
+    "session": "s1",
+    "principal": { "tenant": "halcyon", "role": "tier1", "purpose": "support" },
+    "turns": [{ "type": "user", "text": "How many seats is Halcyon billed for?" }],
+    "gold": { "answer": "Halcyon is billed for 18 seats." }
+  },
+  {
+    "id": "m0-03",
+    "module": "m0",
+    "session": "s1",
+    "principal": { "tenant": "halcyon", "role": "tier1", "purpose": "support" },
+    "turns": [{ "type": "user", "text": "Which article explains a greyed-out Route Optimizer?" }],
+    "gold": { "answer": "Cite [KB-031]. Route Optimizer is greyed out without the add-on." }
+  },
+  {
+    "id": "m0-04",
+    "module": "m0",
+    "session": "s1",
+    "principal": { "tenant": "halcyon", "role": "tier1", "purpose": "support" },
+    "turns": [{ "type": "user", "text": "How many Halcyon tickets are in the seed?" }],
+    "gold": { "answer": "Halcyon has 400 tickets." }
+  },
+  {
+    "id": "m0-05",
+    "module": "m0",
+    "session": "s1",
+    "principal": { "tenant": "halcyon", "role": "tier1", "purpose": "support" },
+    "turns": [{ "type": "user", "text": "What is the Route Optimizer promo unit price before 15:30?" }],
+    "gold": { "answer": "Route Optimizer promo price is 500 cents per seat (v7)." }
+  },
+  {
+    "id": "m0-06",
+    "module": "m0",
+    "session": "s1",
+    "principal": { "tenant": "halcyon", "role": "tier1", "purpose": "support" },
+    "turns": [{ "type": "user", "text": "Is the promised discount applied?" }],
+    "gold": { "answer": "The 20% discount is a note, not an applied discount." }
+  },
+  {
+    "id": "m0-07",
+    "module": "m0",
+    "session": "s1",
+    "principal": { "tenant": "halcyon", "role": "tier1", "purpose": "support" },
+    "turns": [{ "type": "user", "text": "Who is the ops manager at Halcyon?" }],
+    "gold": { "answer": "Priya Shah prefers email." }
+  },
+  {
+    "id": "m0-08",
+    "module": "m0",
+    "session": "s1",
+    "principal": { "tenant": "halcyon", "role": "tier1", "purpose": "support" },
+    "turns": [
+      { "type": "user", "text": "First session." },
+      { "type": "newSession" },
+      { "type": "user", "text": "What should a new session do with the previous transcript?" }
+    ],
+    "gold": { "answer": "A new session does not keep the previous transcript." }
+  }
+]

@@ -1,0 +1,83 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Mermaid from "../../../components/Mermaid.astro";
+import { contextModules } from "../../../data/context";
+const base = import.meta.env.BASE_URL;
+const description = "A hands-on, eval-driven course on context engineering. Nine modules, three languages, three tracks, one Fernhill dataset.";
+---
+<Base title="Context, memory, safety, evals" description={description}>
+  <section class="hero wrap">
+    <p class="kicker">AI systems workshop · draft v0.2 in the design</p>
+    <h1>Context, memory, safety, evals.</h1>
+    <p class="lede">{description} The agent runs as JSONL-over-stdio or HTTP. It reaches Fernhill only through mock MCP servers.</p>
+    <div class="pill-row">
+      <span class="pill">TypeScript, Python, Go</span>
+      <span class="pill">Vercel AI SDK</span>
+      <span class="pill">Google ADK</span>
+      <span class="pill">Claude Desktop</span>
+    </div>
+  </section>
+  <section class="wrap band">
+    <h2>Defaults</h2>
+    <div class="table-wrap">
+      <table>
+        <tbody>
+          <tr><th>Languages</th><td>TypeScript, Python, and Go starters</td></tr>
+          <tr><th>Models</th><td>Open models only, $0: Workers AI free allowance and Ollama locally</td></tr>
+          <tr><th>Runtime</th><td>Local first. wrangler dev, or a plain process.</td></tr>
+          <tr><th>Pace</th><td>Two modules a week, about 5 weeks plus the capstone</td></tr>
+          <tr><th>Tracks</th><td>Do the Vercel AI SDK track first. It is TypeScript, it runs at $0, and it is thin, so you build the context primitives yourself. ADK second. Claude Desktop last, as the no-code check.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="wrap band">
+    <h2>Why this order</h2>
+    <Mermaid chart={`flowchart TD
+      m0["M0 harness"] --> m1["M1 RAG"]
+      m1 --> m2["M2 TTL"]
+      m2 --> m3["M3 memory"]
+      m3 --> m4["M4 conflicts"]
+      m3 --> m5["M5 budget"]
+      m4 --> m6["M6 permissions"]
+      m5 --> m6
+      m6 --> m7["M7 injection"]
+      m7 --> m8["M8 handoff"]
+      m8 --> cap["Capstone"]`} />
+    <ul>
+      <li>Eval harness first. Every later module is a scenario plus scorers, so you measure a baseline before building.</li>
+      <li>Conflicts and budget are short and can run in either order.</li>
+      <li>Safety before multi-agent. A handoff is where leaked data and injected text spread.</li>
+    </ul>
+  </section>
+  <section class="wrap band">
+    <h2>Fernhill</h2>
+    <p>A fictional B2B SaaS for field-service scheduling. Plans: Starter, Team, Business. Add-ons such as Route Optimizer. Halcyon is a field-service customer, not a clinic. The design text said "Halcyon Dental Group"; this repo drops the dental framing so the dataset stays generic.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Source</th><th>Contents</th><th>Seeded traps</th></tr></thead>
+        <tbody>
+          <tr><td>CRM</td><td>60 accounts, contacts, owners, notes</td><td>6 plan/seat conflicts with billing</td></tr>
+          <tr><td>Billing</td><td>Subscriptions, 180 invoices</td><td>Halcyon's plan change on 25 Nov 2026</td></tr>
+          <tr><td>Tickets</td><td>2,400 tickets. Halcyon has 400.</td><td>Old fix T-0884, look-alike tenant, injections</td></tr>
+          <tr><td>Catalog</td><td>30 SKUs with price versions</td><td>Promo that ends mid-session (v7 to v8)</td></tr>
+          <tr><td>KB</td><td>80 articles</td><td>Two outdated articles, KB-012 and KB-044</td></tr>
+          <tr><td>People</td><td>Technician records</td><td>Fictional PII and canary strings</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="wrap band">
+    <h2>Modules</h2>
+    <div class="module-list">
+      {contextModules.map((module) => (
+        <a class="module-card" href={`${base}workshops/context-engineering/${module.id}/`}>
+          <p class="meta">{module.hours} · {module.phase}</p>
+          <h3>{module.title}</h3>
+          <p>{module.scenario}</p>
+        </a>
+      ))}
+    </div>
+    <p>Stack, cost, track versions, and open questions are on the <a href={`${base}workshops/context-engineering/notes/`}>notes page</a>.</p>
+  </section>
+</Base>

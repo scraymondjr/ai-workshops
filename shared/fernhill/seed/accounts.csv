@@ -1,0 +1,61 @@
+account_id,tenant,name,segment,region,crm_plan,crm_seats,billing_plan,billing_seats,billing_status,conflict
+acc_halcyon,halcyon,Halcyon,mid,us-east,business,25,team,18,active,true
+acc_brookside,brookside,Brookside Plumbing,smb,us-central,team,10,team,12,active,true
+acc_northline,northline,Northline Dispatch,mid,us-west,starter,8,team,8,active,true
+acc_cedar,cedar,Cedar Field Ops,enterprise,us-east,business,40,business,36,active,true
+acc_redwagon,redwagon,Redwagon Service Group,smb,eu-west,team,6,starter,6,active,true
+acc_pilotlight,pilotlight,Pilotlight Maintenance,mid,us-central,business,15,team,14,active,true
+acc_north,north,North Dispatch,smb,us-east,starter,4,starter,4,trialing,false
+acc_cedar,cedar,Cedar Maintenance,mid,us-central,team,5,team,5,active,false
+acc_redwagon,redwagon,Redwagon Field Ops,enterprise,us-west,business,6,business,6,active,false
+acc_pilotlight,pilotlight,Pilotlight Route Works,smb,eu-west,starter,7,starter,7,active,false
+acc_keystone,keystone,Keystone Service Group,mid,us-east,team,8,team,8,active,false
+acc_harbor,harbor,Harbor Facilities,enterprise,us-central,business,9,business,9,active,false
+acc_summit,summit,Summit Crews,smb,us-west,starter,10,starter,10,active,false
+acc_prairie,prairie,Prairie Logistics,mid,eu-west,team,11,team,11,active,false
+acc_linden,linden,Linden Fleet,enterprise,us-east,business,12,business,12,active,false
+acc_copper,copper,Copper Plant Services,smb,us-central,starter,13,starter,13,active,false
+acc_foothill,foothill,Foothill Dispatch,mid,us-west,team,14,team,14,active,false
+acc_riverbend,riverbend,Riverbend Maintenance,enterprise,eu-west,business,15,business,15,active,false
+acc_maple,maple,Maple Field Ops,smb,us-east,starter,16,starter,16,active,false
+acc_oakline,oakline,Oakline Route Works,mid,us-central,team,17,team,17,active,false
+acc_pine,pine,Pine Service Group,enterprise,us-west,business,18,business,18,active,false
+acc_brightpath,brightpath,Brightpath Facilities,smb,eu-west,starter,19,starter,19,active,false
+acc_clearwater,clearwater,Clearwater Crews,mid,us-east,team,20,team,20,active,false
+acc_swift,swift,Swift Logistics,enterprise,us-central,business,21,business,21,trialing,false
+acc_anchor,anchor,Anchor Fleet,smb,us-west,starter,22,starter,22,active,false
+acc_metro,metro,Metro Plant Services,mid,eu-west,team,23,team,23,active,false
+acc_fieldnote,fieldnote,Fieldnote Dispatch,enterprise,us-east,business,4,business,4,active,false
+acc_route,route,Route Maintenance,smb,us-central,starter,5,starter,5,active,false
+acc_yard,yard,Yard Field Ops,mid,us-west,team,6,team,6,active,false
+acc_depot,depot,Depot Route Works,enterprise,eu-west,business,7,business,7,cancelled,false
+acc_beacon,beacon,Beacon Service Group,smb,us-east,starter,8,starter,8,active,false
+acc_granite,granite,Granite Facilities,mid,us-central,team,9,team,9,active,false
+acc_silverline,silverline,Silverline Crews,enterprise,us-west,business,10,business,10,active,false
+acc_ironwood,ironwood,Ironwood Logistics,smb,eu-west,starter,11,starter,11,active,false
+acc_stonebridge,stonebridge,Stonebridge Fleet,mid,us-east,team,12,team,12,active,false
+acc_bluejay,bluejay,Bluejay Plant Services,enterprise,us-central,business,13,business,13,active,false
+acc_lantern,lantern,Lantern Dispatch,smb,us-west,starter,14,starter,14,active,false
+acc_cinder,cinder,Cinder Maintenance,mid,eu-west,team,15,team,15,active,false
+acc_westwind,westwind,Westwind Field Ops,enterprise,us-east,business,16,business,16,active,false
+acc_lowland,lowland,Lowland Route Works,smb,us-central,starter,17,starter,17,active,false
+acc_highrail,highrail,Highrail Service Group,mid,us-west,team,18,team,18,trialing,false
+acc_drift,drift,Drift Facilities,enterprise,eu-west,business,19,business,19,active,false
+acc_kindling,kindling,Kindling Crews,smb,us-east,starter,20,starter,20,active,false
+acc_paperweight,paperweight,Paperweight Logistics,mid,us-central,team,21,team,21,active,false
+acc_sable,sable,Sable Fleet,enterprise,us-west,business,22,business,22,active,false
+acc_timber,timber,Timber Plant Services,smb,eu-west,starter,23,starter,23,active,false
+acc_nimble,nimble,Nimble Dispatch,mid,us-east,team,4,team,4,active,false
+acc_outdoor,outdoor,Outdoor Maintenance,enterprise,us-central,business,5,business,5,active,false
+acc_parcel,parcel,Parcel Field Ops,smb,us-west,starter,6,starter,6,active,false
+acc_quarry,quarry,Quarry Route Works,mid,eu-west,team,7,team,7,active,false
+acc_radial,radial,Radial Service Group,enterprise,us-east,business,8,business,8,active,false
+acc_saffron,saffron,Saffron Facilities,smb,us-central,starter,9,starter,9,active,false
+acc_upland,upland,Upland Crews,mid,us-west,team,10,team,10,cancelled,false
+acc_vesper,vesper,Vesper Logistics,enterprise,eu-west,business,11,business,11,active,false
+acc_wicket,wicket,Wicket Fleet,smb,us-east,starter,12,starter,12,active,false
+acc_yellowline,yellowline,Yellowline Plant Services,mid,us-central,team,13,team,13,active,false
+acc_cobalt,cobalt,Cobalt Dispatch,enterprise,us-west,business,14,business,14,active,false
+acc_dune,dune,Dune Maintenance,smb,eu-west,starter,15,starter,15,trialing,false
+acc_ember,ember,Ember Field Ops,mid,us-east,team,16,team,16,active,false
+acc_foxglove,foxglove,Foxglove Route Works,enterprise,us-central,business,17,business,17,active,false

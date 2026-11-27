@@ -1,0 +1,13 @@
+{
+  "manifest_version": "0.2",
+  "name": "fernhill",
+  "display_name": "Fernhill",
+  "version": "0.1.0",
+  "description": "Sketch of the Fernhill desktop extension. Refund and email tools are dry-run. Not a built .mcpb.",
+  "server": {
+    "type": "stdio",
+    "command": "node",
+    "args": ["server.js"]
+  },
+  "tools_preview": ["advance_clock", "get_price", "get_account", "issue_refund", "send_email"]
+}
